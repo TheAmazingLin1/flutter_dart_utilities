@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-/// Makes using the [Finder] with a [WidgetTester] easier.
+/// Some useful utilities for the [Finder]
 extension FinderExtensions on Finder {
   /// Taps the [Finder] and then waits till app is stable.
   ///

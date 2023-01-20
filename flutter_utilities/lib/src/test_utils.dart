@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:golden_toolkit/golden_toolkit.dart';
 
 /// Some useful utilities for the [Finder]
 extension FinderExtensions on Finder {
@@ -80,3 +82,22 @@ extension WidgetTesterExtensions on WidgetTester {
     } while (finder.evaluate().isEmpty);
   }
 }
+
+/// When creating golden tests and using the [DeviceBuilder]
+/// you can pass this as the overrideDevicesForAllScenarios.
+/// ```dart
+/// final builder = DeviceBuilder()
+///   ..overrideDevicesForAllScenarios(
+///     defaultGoldenDevices
+/// )
+/// ```
+List<Device> defaultGoldenDevices = [
+  Device.phone,
+  Device.iphone11,
+  Device.tabletPortrait,
+  Device.tabletLandscape,
+  const Device(
+    name: 'desktop',
+    size: Size(1920, 1080),
+  )
+];

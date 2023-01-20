@@ -40,24 +40,40 @@ extension FinderExtensions on Finder {
   }
 }
 
-/// Waits for a tester to complete until a timeout.
-///
-/// Use this when pumpAndSettle is not waiting long enough for
-/// the task to complete.
-/// https://github.com/flutter/flutter/issues/88765
-Future<void> waitFor(
-  WidgetTester tester,
-  Finder finder, {
-  Duration timeout = const Duration(seconds: 20),
-}) async {
-  final end = tester.binding.clock.now().add(timeout);
+/// Some useful utilities for the [WidgetTester]
+extension WidgetTesterExtensions on WidgetTester {
+  /// Waits for a tester to complete until a timeout.
+  ///
+  /// Use this when pumpAndSettle is not waiting long enough for
+  /// the task to complete.
+  ///
+  /// When using widget tests ensure you run the test with runAsync.
+  /// Widget tests are ran in FakeAsync mode so when you await a
+  /// [Future.delayed] you wait indefinitely.
+  /// ```dart
+  /// testWidgets('a widget test', (tester) {
+  ///   ...
+  ///   await tester.runAsync(() async {
+  ///     await tester.waitFor(find.text('1'));
+  ///     ...
+  ///   });
+  /// })
+  /// ```
+  ///
+  /// https://github.com/flutter/flutter/issues/88765
+  Future<void> waitFor(
+    Finder finder, {
+    Duration timeout = const Duration(seconds: 5),
+  }) async {
+    final end = binding.clock.now().add(timeout);
 
-  do {
-    if (tester.binding.clock.now().isAfter(end)) {
-      throw Exception('Timed out waiting for $finder');
-    }
+    do {
+      if (binding.clock.now().isAfter(end)) {
+        throw Exception('Timed out waiting for $finder');
+      }
 
-    await tester.pumpAndSettle();
-    await Future.delayed(const Duration(milliseconds: 100));
-  } while (finder.evaluate().isEmpty);
+      await pumpAndSettle();
+      await Future.delayed(const Duration(milliseconds: 100));
+    } while (finder.evaluate().isEmpty);
+  }
 }

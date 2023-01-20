@@ -1,17 +1,20 @@
 name: flutter_utilities
 description: Flutter utilities I will use for all my projects
 version: 0.0.1
-homepage:
+publish_to: none
+
 
 environment:
   sdk: '>=3.0.0-122.0.dev <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
+  common_utilities:
+      path: ../common_utilities
   flutter:
     sdk: flutter
 
 dev_dependencies:
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0

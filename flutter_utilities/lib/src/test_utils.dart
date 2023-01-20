@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 
-/// Makes using the [Finder] with a [WidgetTester] easier
+/// Makes using the [Finder] with a [WidgetTester] easier.
 extension FinderExtensions on Finder {
-  /// Taps the [Finder] and then waits till app is stable
+  /// Taps the [Finder] and then waits till app is stable.
   ///
   /// ```dart
   /// await find.byKey(Key('button')).tap(tester);
@@ -12,7 +12,7 @@ extension FinderExtensions on Finder {
     await tester.pumpAndSettle();
   }
 
-  /// Checks to see if this finder matches the [matcher]
+  /// Checks to see if this finder matches the [matcher].
   ///
   /// ```dart
   /// await find.text('1').should(findsOneWidget);
@@ -21,9 +21,9 @@ extension FinderExtensions on Finder {
     expect(this, matcher);
   }
 
-  /// Types the [text] into this [Finder]
+  /// Types the [text] into this [Finder].
   ///
-  /// [shouldSubmit] determines whether the tester will submit the text
+  /// [shouldSubmit] determines whether the tester will submit the text.
   ///
   /// ```dart
   /// await find.byKey(Key('textField')).enterText('test', shouldSubmit: true);
@@ -39,14 +39,6 @@ extension FinderExtensions on Finder {
     await tester.pumpAndSettle();
   }
 }
-
-// extension TesterExtensions on WidgetTester {
-//   /// Submits text after typing
-//   Future<void> enterAndSubmitText(Finder finder, String text) async {
-//     await enterText(finder, text);
-//     await testTextInput.receiveAction(TextInputAction.done);
-//   }
-// }
 
 /// Waits for a tester to complete until a timeout.
 ///

@@ -28,8 +28,11 @@ extension FinderExtensions on Finder {
   /// ```dart
   /// await find.byKey(Key('textField')).enterText('test', shouldSubmit: true);
   /// ```
-  Future<void> enterText(WidgetTester tester, String text,
-      {bool shouldSubmit = true}) async {
+  Future<void> enterText(
+    WidgetTester tester,
+    String text, {
+    bool shouldSubmit = true,
+  }) async {
     await tester.enterText(this, text);
 
     if (shouldSubmit) {
